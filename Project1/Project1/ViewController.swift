@@ -8,8 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UITableViewController {
+    var pictures = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // allows us to work with the filesystem which we will use to look for files
@@ -17,14 +18,16 @@ class ViewController: UIViewController {
         // path of our apps bundle
         let path = Bundle.main.resourcePath!
         
-        // Do any additional setup after loading the view, typically from a nib.
+        // Accesses the items.
+        let items = try! fm.contentsOfDirectory(atPath: path)
+        
+        for item in items{
+            if item.hasPrefix("nssl"){
+                pictures.append(item)
+            }
+        }
+        
+        print(pictures)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
-
